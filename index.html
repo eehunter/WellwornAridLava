@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO Character Sheet</title>
+    <style>
+      #chars { width: 20%; height: 90%; position: fixed; background: #eee; }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js">
+    </script>
+    <script>
+      /*window.onload = fucntion(){
+        socket.emit('charsrequest', []);
+      }*/
+      $(function () {
+        var socket = io();
+        /**$('form').submit(function(e){
+          e.preventDefault(); // prevents page reloading
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });*/
+        socket.on('char recieved', function(msg){
+          $('#charsl').append($('<li>').append($('<a href="https://WellwornAridLava.theexaminer.repl.co/'+msg+'">'+msg+'</a>')));
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="chars">
+      <ul id="charsl">
+        
+      </ul>
+    </div>
+
+
+
+
+  </body>
+</html>
