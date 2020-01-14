@@ -21,7 +21,7 @@
           return false;
         });*/
         socket.on('char recieved', function(msg){
-          $('#charsl').append($('<li>').append($('<a href="https://WellwornAridLava.theexaminer.repl.co/'+msg+'">'+msg+'</a>')));
+          $('#charsl').append($('<li>').append($('<a href="https://WellwornAridLava.theexaminer.repl.co/char?char='+msg+'">'+msg+'</a>')));
         });
       });
     </script>

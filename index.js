@@ -1,6 +1,7 @@
 //import './dict.js';
 
 var fs = require("fs");
+var url = require('url');
 var app = require('express')();
 var http = require("http").createServer(app);
 var dict = require("./dict");
@@ -74,15 +75,29 @@ var chars = ["Test"];
 
 app.get('/', function(req, res) {
   //res.cookie("char", chars);
-  res.sendFile(__dirname + '/index.html');
-  
+  var q = url.parse(req.url, true).query;
+  if(q.char == null){
+    res.sendFile(__dirname + '/index.html');
+  } else {
+    res.sendFile(__dirname + '/test.html');
+  }
+  console.log(q);
+  //res.sendFile(__dirname, '/test.html');
   
   //res.sendFile(__dirname + '/test.html');
 });
 
+app.get('/char', function(req, res){
+  var q = url.parse(adr, true).query;
+  res.sendFile(__dirname, '/test.html');
+
+});
+
+
 io.on('connection', function(socket) {
+  
   console.log('a user connected');
-  chars.forEach(function(i, v){socket.emit('char recieved', v)});
+  chars.forEach(function(v, i){socket.emit('char recieved', v)});
   socket.on('disconnect', function() {
     console.log('user disconnected');
   });
